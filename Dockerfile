@@ -18,7 +18,7 @@ COPY requirements.txt   .
 
 RUN chown -R app /home/app && \
   mkdir -p /home/app/python && chown -R app /home/app
-USER app
+
 ENV PATH=$PATH:/home/app/.local/bin:/home/app/python/bin/
 ENV PYTHONPATH=$PYTHONPATH:/home/app/python
 
@@ -41,8 +41,6 @@ COPY function           function
 # Allow any user-id for OpenShift users.
 RUN chown -R app:app ./ && \
   chmod -R 777 /home/app/python
-
-USER app
 
 ENV fprocess="python3 index.py"
 EXPOSE 8080
